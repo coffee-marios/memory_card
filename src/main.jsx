@@ -1,10 +1,21 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import App from "./App.jsx";
+import Cards from "./components/Cards.jsx";
+import "./styles/Container.css";
+import "./styles/Cards.css";
 
-createRoot(document.getElementById('root')).render(
+const characters = [
+  "charizard",
+  "blastoise",
+  "venusaur",
+  "greninja",
+  "infernape",
+];
+
+createRoot(document.getElementById("root")).render(
   <StrictMode>
     <App />
-  </StrictMode>,
-)
+  </StrictMode>
+);
