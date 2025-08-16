@@ -1,20 +1,20 @@
-.Cards {
-    padding: 10;
-    background-color: black;
+/* * {
+    background-color: bisque;
 }
 
 
 .container {
-    width: 80%;
     background-color: aqua;
+
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     border: 2px solid magenta;
-    margin: auto;
+
 
 }
 
 img {
-    width: 98%;
-    border: 1px solid gold;
-}
+    margin: 12px;
+    width: 200px;
+    border: 1px solid salmon;
+} */

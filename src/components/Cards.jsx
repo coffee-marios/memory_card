@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
-import "../styles/Container.css";
+import "../styles/container.css";
 
-function Cards({ name, image }) {
+function Cards({ name, image, number }) {
   console.log(name, image);
   return (
     <div className="Cards">
       <img src={image} alt={name} />
 
-      <p>{name}</p>
+      {/* <p>
+        {name}&nbsp;&nbsp;&nbsp;&nbsp; {number + 1}
+      </p> */}
     </div>
   );
 }

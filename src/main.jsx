@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 import Cards from "./components/Cards.jsx";
-import "./styles/Container.css";
+import "./styles/container.css";
 import "./styles/Cards.css";
 
 const characters = [
