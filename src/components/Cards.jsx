@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "../styles/container.css";
 
-function Cards({ name, image, number }) {
-  console.log(name, image);
+function Cards({ name, image, number, onClick }) {
+  // console.log(name, image);
   return (
-    <div className="Cards">
+    <div className="Cards" onClick={onClick}>
       <img src={image} alt={name} />
 
       {/* <p>
