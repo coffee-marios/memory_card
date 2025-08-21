@@ -48,7 +48,10 @@ async function fetchCards() {
   );
   const cardsObj = results
     .filter((r) => r.status === "fulfilled")
-    .map((r) => r.value);
+    .map((r) => ({
+      ...r.value,
+      number: 0,
+    }));
   console.log(cardsObj, 3);
   return cardsObj;
 }
@@ -56,14 +59,30 @@ async function fetchCards() {
 export default function App() {
   const [pokemonList, setImageList] = useState([]);
   const [randomPokemonList, randomSetImageList] = useState([]);
+  const [shouldReorder, setShouldReorder] = useState(false);
 
-  function changePositions() {
+  function handleClick(name, number) {
+    let newNumber = number + 1;
+
     const copyPokemonList = [...pokemonList];
     const newOrderPokemon = randomize(copyPokemonList);
-    console.clear();
 
-    setImageList(newOrderPokemon);
+    setImageList((prev) =>
+      prev.map((poke) =>
+        poke.name === name ? { ...poke, number: newNumber } : poke
+      )
+    );
+    setShouldReorder(true);
   }
+
+  useEffect(() => {
+    const copyPokemonList = [...pokemonList];
+    const newOrderPokemon = randomize(copyPokemonList);
+    if (shouldReorder) {
+      setImageList(() => newOrderPokemon);
+      setShouldReorder(false);
+    }
+  }, [shouldReorder]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -80,10 +99,8 @@ export default function App() {
           key={p.name + "_20"}
           image={p.sprites.other["official-artwork"].front_default}
           name={p.name}
-          number={i}
-          onClick={() => {
-            changePositions();
-          }}
+          number={p.number}
+          onClick={(name, number) => handleClick(name, number)}
         />
       ))}
     </div>
