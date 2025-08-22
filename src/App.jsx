@@ -61,6 +61,8 @@ export default function App() {
   const [randomPokemonList, randomSetImageList] = useState([]);
   const [shouldReorder, setShouldReorder] = useState(false);
   const [score, setScore] = useState([0, 0]);
+  const [cheating, setCheating] = useState(false);
+  //const cheating = false;
 
   function handleClick(name, number) {
     let scoreCopy = [...score];
@@ -106,30 +108,39 @@ export default function App() {
   }, []);
 
   return (
-    <div className="container">
-      <div className="side-bar">
-        <div className="instruction">
-          <p>
-            Try to click each picture only one time until you click all of them.
-          </p>
+    <div>
+      <div className="container">
+        <div className="side-bar">
+          <div className="instruction">
+            <p>
+              Try to click each picture only one time until you click all of
+              them.
+            </p>
+          </div>
+
+          <div className="keepScore">
+            <p className="hits">HITS: {score[0]}</p>
+            <p className="losses">LOSSES: {score[1]}</p>
+          </div>
         </div>
 
-        <div className="keepScore">
-          <p className="hits">HITS: {score[0]}</p>
-          <p className="losses">LOSSES: {score[1]}</p>
+        <div className="container-pokemon">
+          {pokemonList.map((p, i) => (
+            <Cards
+              key={p.name + "_20"}
+              image={p.sprites.other["official-artwork"].front_default}
+              name={p.name}
+              number={p.number}
+              onClick={(name, number) => handleClick(name, number)}
+              cheating={cheating}
+            />
+          ))}
         </div>
       </div>
-
-      <div className="container-pokemon">
-        {pokemonList.map((p, i) => (
-          <Cards
-            key={p.name + "_20"}
-            image={p.sprites.other["official-artwork"].front_default}
-            name={p.name}
-            number={p.number}
-            onClick={(name, number) => handleClick(name, number)}
-          />
-        ))}
+      <div>
+        <button onClick={() => setCheating(!cheating)}>
+          {cheating ? "Cheat" : "Clear"}{" "}
+        </button>
       </div>
     </div>
   );
