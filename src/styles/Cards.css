@@ -3,7 +3,6 @@
     background-color: black;
 }
 
-
 .container-pokemon {
     background-color: aqua;
     display: grid;
@@ -16,4 +15,13 @@
 img {
     width: 35%;
     border: 1px solid gold;
+}
+
+@media (max-width: 700px) {
+    .container-pokemon {
+        display: grid;
+        background-color: black;
+        grid-template-columns: repeat(2, 1fr);
+
+    }
 }
