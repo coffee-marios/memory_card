@@ -4,8 +4,7 @@
 }
 
 
-.container {
-    width: 80%;
+.container-pokemon {
     background-color: aqua;
     display: grid;
     grid-template-columns: repeat(4, 1fr);

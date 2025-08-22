@@ -60,8 +60,21 @@ export default function App() {
   const [pokemonList, setImageList] = useState([]);
   const [randomPokemonList, randomSetImageList] = useState([]);
   const [shouldReorder, setShouldReorder] = useState(false);
+  const [score, setScore] = useState([0, 0]);
 
   function handleClick(name, number) {
+    let scoreCopy = [...score];
+    if (number === 0) {
+      let hits = score[0];
+      hits += 1;
+      scoreCopy[0] = hits;
+    } else {
+      let loses = score[1];
+      loses += 1;
+      scoreCopy[1] = loses;
+    }
+    setScore(scoreCopy);
+
     let newNumber = number + 1;
 
     const copyPokemonList = [...pokemonList];
@@ -94,15 +107,30 @@ export default function App() {
 
   return (
     <div className="container">
-      {pokemonList.map((p, i) => (
-        <Cards
-          key={p.name + "_20"}
-          image={p.sprites.other["official-artwork"].front_default}
-          name={p.name}
-          number={p.number}
-          onClick={(name, number) => handleClick(name, number)}
-        />
-      ))}
+      <div className="side-bar">
+        <div className="instruction">
+          <p>
+            Try to click each picture only one time until you click all of them.
+          </p>
+        </div>
+
+        <div className="keepScore">
+          <p className="hits">HITS: {score[0]}</p>
+          <p className="losses">LOSSES: {score[1]}</p>
+        </div>
+      </div>
+
+      <div className="container-pokemon">
+        {pokemonList.map((p, i) => (
+          <Cards
+            key={p.name + "_20"}
+            image={p.sprites.other["official-artwork"].front_default}
+            name={p.name}
+            number={p.number}
+            onClick={(name, number) => handleClick(name, number)}
+          />
+        ))}
+      </div>
     </div>
   );
 }
