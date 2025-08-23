@@ -111,6 +111,7 @@ export default function App() {
     const fetchData = async () => {
       const response = await fetchCards();
       setImageList(response);
+      setShouldReorder(true);
     };
     fetchData();
   }, []);
