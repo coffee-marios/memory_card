@@ -60,14 +60,17 @@ export default function App() {
   const [score, setScore] = useState([0, 0]);
   const [cheating, setCheating] = useState(false);
 
+  function startNewGame() {
+    setImageList((prev) => prev.map((poke) => ({ ...poke, number: 0 })));
+    setScore([0, 0]);
+    setShouldReorder(true);
+    setCheating(false);
+  }
+
   function handleClick(name, number) {
     let scoreCopy = [...score];
     if (scoreCopy[0] >= 20) {
-      setImageList((prev) => prev.map((poke) => ({ ...poke, number: 0 })));
-      setScore([0, 0]);
-      setShouldReorder(true);
-      setCheating(false);
-
+      startNewGame();
       return;
     }
 
@@ -143,7 +146,8 @@ export default function App() {
           ))}
         </div>
       </div>
-      <div>
+      <div className="buttons-bottom-div">
+        <button onClick={() => startNewGame()}>Restart</button>
         <button onClick={() => setCheating(!cheating)}>
           {cheating ? "Clear" : "Cheat"}{" "}
         </button>
