@@ -23,9 +23,7 @@ async function fetchPokemon() {
 
     const result = await response.json();
     const persons = result.results;
-    persons.map((character) => {
-      // console.log(character.name);
-    });
+    persons.map((character) => {});
     return persons;
   } catch (error) {
     console.error(error);
@@ -36,7 +34,6 @@ async function fetchCards() {
   const pokemonArray = [];
   const pokemonObj = await fetchPokemon();
   pokemonObj.map((obj) => pokemonArray.push(obj.name));
-  console.log(90, pokemonArray);
 
   const results = await Promise.allSettled(
     pokemonArray.map(async (name) => {
@@ -62,10 +59,18 @@ export default function App() {
   const [shouldReorder, setShouldReorder] = useState(false);
   const [score, setScore] = useState([0, 0]);
   const [cheating, setCheating] = useState(false);
-  //const cheating = false;
 
   function handleClick(name, number) {
     let scoreCopy = [...score];
+    if (scoreCopy[0] >= 20) {
+      setImageList((prev) => prev.map((poke) => ({ ...poke, number: 0 })));
+      setScore([0, 0]);
+      setShouldReorder(true);
+      setCheating(false);
+
+      return;
+    }
+
     if (number === 0) {
       let hits = score[0];
       hits += 1;
@@ -113,8 +118,9 @@ export default function App() {
         <div className="side-bar">
           <div className="instruction">
             <p>
-              Try to click each picture only one time until you click all of
-              them.
+              {score[0] < 20
+                ? "Try to click each picture only one time until you click all of them."
+                : "Click any picture to start a new game"}
             </p>
           </div>
 
@@ -139,7 +145,7 @@ export default function App() {
       </div>
       <div>
         <button onClick={() => setCheating(!cheating)}>
-          {cheating ? "Cheat" : "Clear"}{" "}
+          {cheating ? "Clear" : "Cheat"}{" "}
         </button>
       </div>
     </div>

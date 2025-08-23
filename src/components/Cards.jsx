@@ -3,11 +3,11 @@ import "../styles/container.css";
 
 function Cards({ name, image, number, cheating, onClick }) {
   return (
-    <div className="Cards" onClick={() => onClick(name, number)}>
-      <img src={image} alt={name} />
+    <div className="Cards">
+      <img src={image} alt={name} onClick={() => onClick(name, number)} />
 
       {
-        <div className={cheating ? "hide-names" : "show-names"}>
+        <div className={cheating ? "show-names" : "hide-names"}>
           <p>
             {name.toUpperCase()}:&nbsp;&nbsp;&nbsp;&nbsp; {number}
           </p>
