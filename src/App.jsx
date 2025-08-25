@@ -69,7 +69,6 @@ export default function App() {
   function handleClick(name, number) {
     let scoreCopy = [...score];
     if (scoreCopy[0] >= 20) {
-      startNewGame();
       return;
     }
 
@@ -123,7 +122,7 @@ export default function App() {
             <p>
               {score[0] < 20
                 ? "Try to click each picture only one time until you click all of them."
-                : "You have clicked all the pictures. Click any picture to start a new game"}
+                : "You have clicked all the pictures. Click the button at the bottom to start a new game."}
             </p>
           </div>
 
