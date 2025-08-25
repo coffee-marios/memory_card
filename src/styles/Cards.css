@@ -4,22 +4,33 @@
 
 
 .Cards {
-    padding: 10;
     background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    flex-direction: column;
+
 }
 
 .container-pokemon {
-    background-color: aqua;
+    background-color: magenta;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    border: 2px solid magenta;
-    margin: auto;
+    border: 6px solid magenta;
+    place-items: center;
+    gap: 5px;
 
 }
 
 img {
-    width: 35%;
-    border: 1px solid gold;
+    max-width: 50%;
+    height: auto;
+    display: block;
+    border: 1px solid saddlebrown;
+    border-radius: 100%;
+    background-color: rgba(245, 245, 241, 0.861);
+    padding: 1rem;
 }
 
 .show-names {
@@ -35,8 +46,9 @@ img {
 @media (max-width: 700px) {
     .container-pokemon {
         display: grid;
-        background-color: black;
+        background-color: magenta;
         grid-template-columns: repeat(2, 1fr);
+
 
     }
 }

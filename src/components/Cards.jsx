@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import "../styles/container.css";
 
 function Cards({ name, image, number, cheating, onClick }) {
   return (
     <div className="Cards">
+      <br />
+      <br />
       <img src={image} alt={name} onClick={() => onClick(name, number)} />
 
       {

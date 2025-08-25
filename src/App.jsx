@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import Cards from "./components/Cards.jsx";
-import "./styles/container.css";
 
 import "./App.css";
 
@@ -119,12 +118,12 @@ export default function App() {
   return (
     <div>
       <div className="container">
-        <div className="side-bar">
+        <div className="info-bar">
           <div className="instruction">
             <p>
               {score[0] < 20
                 ? "Try to click each picture only one time until you click all of them."
-                : "Click any picture to start a new game"}
+                : "You have clicked all the pictures. Click any picture to start a new game"}
             </p>
           </div>
 
