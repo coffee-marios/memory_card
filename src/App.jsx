@@ -58,16 +58,22 @@ export default function App() {
   const [shouldReorder, setShouldReorder] = useState(false);
   const [score, setScore] = useState([0, 0]);
   const [cheating, setCheating] = useState(false);
+  const [clickIndex, setIndex] = useState({
+    nowClicked: "empty",
+    allClicked: new Set(),
+  });
 
   function startNewGame() {
     setImageList((prev) => prev.map((poke) => ({ ...poke, number: 0 })));
     setScore([0, 0]);
     setShouldReorder(true);
     setCheating(false);
+    setIndex({ nowClicked: "empty", allClicked: new Set() });
   }
 
   function handleClick(name, number) {
     let scoreCopy = [...score];
+
     if (scoreCopy[0] >= 20) {
       return;
     }
@@ -94,6 +100,25 @@ export default function App() {
       )
     );
     setShouldReorder(true);
+  }
+
+  function getClass(index, name) {
+    if (index !== clickIndex.nowClicked) return "non-clicked-image";
+    // console.log("Set contents:", [...clickIndex.allClicked]);
+    if (index === clickIndex.nowClicked) {
+      if (clickIndex.allClicked.has(name)) {
+        return "failure-border";
+      } else {
+        return "hit-border";
+      }
+    }
+  }
+
+  function addName(name) {
+    const clickedByNow = clickIndex.allClicked;
+    const mySet = new Set(clickedByNow);
+    mySet.add(name);
+    setIndex((prev) => ({ ...prev, allClicked: mySet }));
   }
 
   useEffect(() => {
@@ -133,13 +158,24 @@ export default function App() {
         </div>
 
         <div className="container-pokemon">
-          {pokemonList.map((p, i) => (
+          {pokemonList.map((p, index) => (
             <Cards
               key={p.name + "_20"}
               image={p.sprites.other["official-artwork"].front_default}
               name={p.name}
               number={p.number}
               onClick={(name, number) => handleClick(name, number)}
+              onMouseDown={(event) => {
+                setIndex((prev) => ({ ...prev, nowClicked: index }));
+                console.log("mouse down:", event);
+                // event.stopPropagation();
+              }}
+              onMouseUp={() => {
+                setIndex((prev) => ({ ...prev, nowClicked: "empty" }));
+                addName(p.name);
+                console.log("Mouse up:");
+              }}
+              className={getClass(index, p.name)}
               cheating={cheating}
             />
           ))}

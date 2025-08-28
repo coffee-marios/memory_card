@@ -1,11 +1,32 @@
 import React, { useState, useEffect } from "react";
 
-function Cards({ name, image, number, cheating, onClick }) {
+function Cards({
+  name,
+  image,
+  number,
+  cheating,
+  onClick,
+  borderImage,
+  className,
+  onMouseDown,
+  onMouseUp,
+}) {
   return (
     <div className="Cards">
       <br />
       <br />
-      <img src={image} alt={name} onClick={() => onClick(name, number)} />
+      <img
+        src={image}
+        alt={name}
+        className={className}
+        onClick={() => onClick(name, number)}
+        onMouseDown={(event) => {
+          onMouseDown(event);
+        }}
+        onMouseUp={(event) => {
+          onMouseUp(event);
+        }}
+      />
 
       {
         <div className={cheating ? "show-names" : "hide-names"}>

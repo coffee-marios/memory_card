@@ -33,6 +33,20 @@ img {
     padding: 1rem;
 }
 
+.hit-border {
+    border: 5px solid green;
+}
+
+.failure-border {
+    border: 5px solid red;
+
+}
+
+.non-clicked-image {
+    border: none;
+}
+
+
 .show-names {
     color: green;
 }
